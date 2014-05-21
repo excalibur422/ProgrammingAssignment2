@@ -3,14 +3,14 @@
 ## Right or Wrong, I just replaced the function mean with the function inverse
 
 makeCacheMatrix <- function(x = matrix()) {
-  i  <- NULL
+  m  <- NULL
   set  <- function(y){
     x <<- y
-    i <<- NULL 
+    m <<- NULL 
   }
   get  <- function() x
-  setInverse  <- function(inverse) i  <<- inverse
-  getInverse  <- function() i
+  setInverse  <- function(inverse) m  <<- inverse
+  getInverse  <- function() m
   list(set= set, get = get, 
        setInverse = setInverse, 
        getInverse = getInverse)
@@ -23,15 +23,14 @@ makeCacheMatrix <- function(x = matrix()) {
 ## Right or Wrong, I just replaced the function mean with the function inverse
 
 cacheSolve <- function(x, ...) {
-  i  <- x$getInverse()
-  if (!is.null(i)){
+  m  <- x$getInverse()
+  if (!is.null(m)){
     message("getting cached data")
-    return(i)
+    return(m)
   }
   data  <- x$get()
-  i  <- solve(data, ...)
+  m  <- solve(data, ...)
   x$setInverse(i)
-  i
+  m
 }
 
-cachesolve(myMatrix)
